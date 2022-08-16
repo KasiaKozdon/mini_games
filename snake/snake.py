@@ -9,7 +9,6 @@ RIGHT = 0
 
 class Snake:
     def __init__(self):
-        self.snake_len = 0
         # create snake
         self.segments = []
         self.create_snake()
@@ -20,7 +19,7 @@ class Snake:
         [self.add_segment(STARTING_POSITIONS[idx]) for idx in range(STARTING_LEN)]
 
     def move(self):
-        for segment in range(self.snake_len - 1, 0, -1):
+        for segment in range(len(self.segments) - 1, 0, -1):
             self.segments[segment].setpos(self.segments[segment - 1].pos())
         self.head.forward(MOVE_DISTANCE)
 
@@ -46,7 +45,7 @@ class Snake:
         new_segment.color('white')
         new_segment.setpos(position)
         self.segments.append(new_segment)
-        self.snake_len += 1
+
 
     def extend(self):
         tail_position = self.segments[-1].position()
@@ -68,5 +67,12 @@ class Snake:
     def detect_collision(self):
         self.detect_wall_collision()
         self.detect_self_collision()
+
+    def reset(self):
+        [segment.goto(1000, 1000) for segment in self.segments]
+        self.segments.clear()
+        self.create_snake()
+        self.head = self.segments[0]
+        self.alive = True
 
 

@@ -23,7 +23,6 @@ screen.onkey(snake.down, "Down")
 screen.onkey(snake.left, "Left")
 screen.onkey(snake.right, "Right")
 
-# move snake (always forward)
 game_is_on = True
 while game_is_on:
     screen.update()
@@ -33,10 +32,12 @@ while game_is_on:
         food.refresh()
         snake.extend()
         scoreboard.increase_score()
-
     snake.detect_collision()
     if not snake.alive:
-        scoreboard.game_over()
-        game_is_on = False
+        screen.bgcolor("grey")
+        time.sleep(1.0)
+        screen.bgcolor("black")
+        scoreboard.reset()
+        snake.reset()
 
 screen.exitonclick()
