@@ -1,3 +1,5 @@
 .DS_Store
 __pycache__/
 */.idea/
+
+guess_states/states_to_practice.csv
